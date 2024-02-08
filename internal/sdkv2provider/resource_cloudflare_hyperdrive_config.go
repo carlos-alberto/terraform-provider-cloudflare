@@ -85,11 +85,21 @@ func resourceCloudflareHyperdriveConfigRead(ctx context.Context, d *schema.Resou
 
 	d.Set("name", resp.Name)
 
-	if err := d.Set("origin", resp.Origin); err != nil {
+	if err := d.Set("origin", map[string]interface{}{
+		"database": resp.Origin.Database,
+		"host":     resp.Origin.Host,
+		"port":     resp.Origin.Port,
+		"scheme":   resp.Origin.Scheme,
+		"user":     resp.Origin.User,
+	}); err != nil {
 		return diag.FromErr(fmt.Errorf("failed to set origin: %w", err))
 	}
 
-	if err := d.Set("caching", resp.Caching); err != nil {
+	if err := d.Set("caching", map[string]interface{}{
+		"disabled":               resp.Caching.Disabled,
+		"maxage":                 resp.Caching.MaxAge,
+		"stale_while_revalidate": resp.Caching.StaleWhileRevalidate,
+	}); err != nil {
 		return diag.FromErr(fmt.Errorf("failed to set caching: %w", err))
 	}
 

@@ -22,6 +22,11 @@ func resourceCloudflareHyperdriveConfigSchema() map[string]*schema.Schema {
 			Required:    true,
 			Description: "The name of the Hyperdrive configuration.",
 		},
+		"password": {
+			Type:        schema.TypeString,
+			Required:    true,
+			Description: "The password of the Hyperdrive configuration.",
+		},
 		"origin": {
 			Type:        schema.TypeSet,
 			Required:    true,
@@ -40,8 +45,9 @@ func resourceCloudflareHyperdriveConfigSchema() map[string]*schema.Schema {
 					},
 					"port": {
 						Type:        schema.TypeString,
-						Required:    true,
+						Optional:    true,
 						Description: "The port (default: 5432 for Postgres) of your origin database.",
+						Default:    "5432",
 					},
 					"scheme": {
 						Type:         schema.TypeString,
