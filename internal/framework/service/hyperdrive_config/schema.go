@@ -39,6 +39,7 @@ func (r *HyperdriveConfigResource) Schema(ctx context.Context, req resource.Sche
 			"password": schema.StringAttribute{
 				MarkdownDescription: "The password of the Hyperdrive configuration.",
 				Required:            true,
+				Sensitive:           true,
 			},
 			"origin": schema.SingleNestedAttribute{
 				MarkdownDescription: "The origin details for the Hyperdrive configuration.",

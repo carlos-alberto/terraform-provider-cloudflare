@@ -54,9 +54,9 @@ func TestAccCloudflareHyperdriveConfig_Basic(t *testing.T) {
 
 	var origin = cloudflare.HyperdriveConfigOrigin{
 		Database: "database",
-		Host:     "host",
-		Port:     1234,
-		Scheme:   "scheme",
+		Host:     "host.example.com",
+		Port:     5432,
+		Scheme:   "postgres",
 		User:     "user",
 	}
 
@@ -114,8 +114,8 @@ func TestAccCloudflareHyperdriveConfig_Minimum(t *testing.T) {
 
 	var origin = cloudflare.HyperdriveConfigOrigin{
 		Database: "database",
-		Host:     "host",
-		Port:     1234,
+		Host:     "host.example.com",
+		Port:     5432,
 	}
 
 	resource.ParallelTest(t, resource.TestCase{

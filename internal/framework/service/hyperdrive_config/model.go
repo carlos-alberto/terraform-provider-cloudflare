@@ -21,6 +21,6 @@ type HyperdriveConfigOriginModel struct {
 
 type HyperdriveConfigCachingModel struct {
 	Disabled             types.Bool  `tfsdk:"disabled"`
-	MaxAge               types.Int64 `tfsdk:"maxage"`
+	MaxAge               types.Int64 `tfsdk:"max_age"`
 	StaleWhileRevalidate types.Int64 `tfsdk:"stale_while_revalidate"`
 }
