@@ -2,12 +2,12 @@
 page_title: "cloudflare_hyperdrive_config Resource - Cloudflare"
 subcategory: ""
 description: |-
-  Provides the ability to manage Cloudflare Hyperdrive configurations.
+  The Hyperdrive Config https://developers.cloudflare.com/hyperdrive/ resource allows you to manage Cloudflare Hyperdrive Configs.
 ---
 
 # cloudflare_hyperdrive_config (Resource)
 
-Provides the ability to manage Cloudflare Hyperdrive configurations.
+The [Hyperdrive Config](https://developers.cloudflare.com/hyperdrive/) resource allows you to manage Cloudflare Hyperdrive Configs.
 
 ## Example Usage
 
@@ -17,7 +17,7 @@ resource "cloudflare_hyperdrive_config" "no_defaults" {
   account_id = "f037e56e89293a057740de681ac9abbe"
   name       = "my-hyperdrive-config"
   password   = "my-password"
-  origin {
+  origin     = {
     database = "postgres"
     host     = "my-database.example.com"
   }
@@ -28,14 +28,14 @@ resource "cloudflare_hyperdrive_config" "no_defaults" {
   account_id = "f037e56e89293a057740de681ac9abbe"
   name       = "my-hyperdrive-config"
   password   = "my-password"
-  origin {
+  origin     = {
     database = "postgres"
     host     = "my-database.example.com"
     port     = 5432
     scheme   = "postgres"
     user     = "my-user"
   }
-  caching {
+  caching    = {
     disabled               = false
     max_age                = 60
     stale_while_revalidate = 30
@@ -49,18 +49,15 @@ resource "cloudflare_hyperdrive_config" "no_defaults" {
 
 - `account_id` (String) The account identifier to target for the resource.
 - `name` (String) The name of the Hyperdrive configuration.
-- `origin` (Block Set, Min: 1) The origin details for the Hyperdrive configuration. (see [below for nested schema](#nestedblock--origin))
+- `origin` (Attributes) The origin details for the Hyperdrive configuration. (see [below for nested schema](#nestedatt--origin))
 - `password` (String) The password of the Hyperdrive configuration.
 
 ### Optional
 
-- `caching` (Block Set) The caching of the Hyperdrive. (see [below for nested schema](#nestedblock--caching))
+- `caching` (Attributes) The caching details for the Hyperdrive configuration. (see [below for nested schema](#nestedatt--caching))
+- `id` (String) The identifier of this resource. This is the hyperdrive config value.
 
-### Read-Only
-
-- `id` (String) The ID of this resource.
-
-<a id="nestedblock--origin"></a>
+<a id="nestedatt--origin"></a>
 ### Nested Schema for `origin`
 
 Required:
@@ -70,19 +67,19 @@ Required:
 
 Optional:
 
-- `port` (String) The port (default: 5432 for Postgres) of your origin database. Defaults to `5432`.
-- `scheme` (String) Specifies the URL scheme used to connect to your origin database. Available values: `postgres`, `postgresql`. Defaults to `postgres`.
+- `port` (Number) The port (default: 5432 for Postgres) of your origin database.
+- `scheme` (String) Specifies the URL scheme used to connect to your origin database.
 - `user` (String) The user of your origin database.
 
 
-<a id="nestedblock--caching"></a>
+<a id="nestedatt--caching"></a>
 ### Nested Schema for `caching`
 
 Optional:
 
-- `disabled` (Boolean) When set to true, disables the caching of SQL responses. Defaults to `false`.
-- `max_age` (Number) When present, specifies max duration for which items should persist in the cache. Defaults to `60`.
-- `stale_while_revalidate` (Number) When present, indicates the number of seconds cache may serve the response after it becomes stale. Defaults to `15`.
+- `disabled` (Boolean) Disable caching for this Hyperdrive configuration.
+- `max_age` (Number) The maximum age of the cache.
+- `stale_while_revalidate` (Number) The time to wait before revalidating the cache.
 
 ## Import
 
